@@ -10,6 +10,10 @@ const requestData = (url, functionHandler) => {
     .catch(error => console.log(error.message));
 };
 const galleryList = document.querySelector(".gallery__list");
+const gallerySection = document.querySelector("#gallery");
+const modal = document.createElement("div");
+const createImg = document.createElement("img");
+const closeModalButton = document.createElement("button");
 
 const randomDate = () => {
   const getRandomArbitrary = (min, max) => Math.random() * (max - min) + min;
@@ -18,19 +22,30 @@ const randomDate = () => {
   return new Date(getRandomArbitrary(date1, date2)).toLocaleDateString();
 };
 
+const createModal = url => {
+  gallery.appendChild(modal);
+  modal.setAttribute("class", "gallery__modal--open");
+  modal.appendChild(createImg);
+  createImg.setAttribute("class", "gallery__modal__img");
+  createImg.setAttribute("src", url);
+  createModalCloseButton();
+};
+const createModalCloseButton = () => {
+  closeModalButton.setAttribute("class", "gallery__modal__closeButton");
+  modal.appendChild(closeModalButton);
+  closeModalButton.innerText = "ZAMKNIJ";
+  closeModalButton.addEventListener("click", () => {
+    gallerySection.removeChild(document.querySelector(".gallery__modal--open"));
+  });
+};
 const createList = data => {
   const pictureObjectsArray = data.hits;
   pictureObjectsArray
     .map(element => {
-      const bodyTag = document.querySelector("#gallery");
       const galleryListItem = document.createElement("li");
       const galleryImage = document.createElement("img");
       const galleryImageTitle = document.createElement("h3");
       const galleryImageSubtitle = document.createElement("h5");
-      const modal = document.querySelector(".gallery__modal--close");
-      const closeModalButton = document.querySelector(
-        ".gallery__modal__closeButton"
-      );
 
       galleryListItem.appendChild(galleryImage);
       galleryListItem.appendChild(galleryImageTitle);
@@ -43,11 +58,7 @@ const createList = data => {
       galleryImageSubtitle.setAttribute("class", "gallery__image__subtitle");
 
       galleryImage.addEventListener("click", event => {
-        console.log(event.target.src);
-        modal.classList.toggle("gallery__modal--open");
-      });
-      closeModalButton.addEventListener("click", event => {
-        modal.classList.remove("gallery__modal--open");
+        createModal(element.largeImageURL);
       });
 
       galleryImageSubtitle.innerText = `Dodane przez: ${element.user}`;

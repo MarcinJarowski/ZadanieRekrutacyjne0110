@@ -96,8 +96,6 @@ body {
     max-height: 96%;
     border-radius: 10px;
     margin: 2%;
-    transition: transform 1s ease-in-out;
-    overflow: hidden;
   }
   .gallery__image:hover {
     cursor: pointer;
@@ -108,12 +106,27 @@ body {
     padding: 5px;
   }
   .gallery__modal--open {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    background-color: #9f9f9f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
     z-index: 999;
     width: 100vw;
     height: 100vh;
+  }
+  .gallery__modal__closeButton {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  .gallery__modal__img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    display: block;
+    margin: auto;
   }
 }
