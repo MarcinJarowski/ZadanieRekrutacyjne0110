@@ -22,20 +22,33 @@ const createList = data => {
   const pictureObjectsArray = data.hits;
   pictureObjectsArray
     .map(element => {
-      console.log(element);
+      const bodyTag = document.querySelector("#gallery");
       const galleryListItem = document.createElement("li");
       const galleryImage = document.createElement("img");
       const galleryImageTitle = document.createElement("h3");
       const galleryImageSubtitle = document.createElement("h5");
+      const modal = document.querySelector(".gallery__modal--close");
+      const closeModalButton = document.querySelector(
+        ".gallery__modal__closeButton"
+      );
 
       galleryListItem.appendChild(galleryImage);
       galleryListItem.appendChild(galleryImageTitle);
       galleryListItem.appendChild(galleryImageSubtitle);
+
       galleryListItem.setAttribute("class", "gallery__listitem");
       galleryImage.setAttribute("src", element.largeImageURL);
       galleryImage.setAttribute("class", "gallery__image");
       galleryImageTitle.setAttribute("class", "gallery__image__title");
       galleryImageSubtitle.setAttribute("class", "gallery__image__subtitle");
+
+      galleryImage.addEventListener("click", event => {
+        console.log(event.target.src);
+        modal.classList.toggle("gallery__modal--open");
+      });
+      closeModalButton.addEventListener("click", event => {
+        modal.classList.remove("gallery__modal--open");
+      });
 
       galleryImageSubtitle.innerText = `Dodane przez: ${element.user}`;
       galleryImageTitle.innerText = randomDate();
@@ -46,6 +59,6 @@ const createList = data => {
 };
 
 requestData(
-  "https://pixabay.com/api/?key=13774470-6c5a921daa2ecf77f068a8231&per_page=20&page=20",
+  "https://pixabay.com/api/?key=13774470-6c5a921daa2ecf77f068a8231&per_page=20&page=6",
   createList
 );
