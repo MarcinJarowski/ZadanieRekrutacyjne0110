@@ -1,0 +1,38 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Quicksand", sans-serif;
+  box-sizing: border-box;
+  background-color: #3f3f3f;
+}
+.gallery__list {
+  list-style: none;
+  column-count: 3;
+  margin: 1vw;
+  column-gap: 1vw;
+  text-align: center;
+}
+.gallery__listitem {
+  border-radius: 2%;
+  background-color: #fff;
+  margin-bottom: 1vw;
+  display: inline-block;
+  max-width: 32vw;
+  max-height: auto;
+}
+
+.gallery__image {
+  max-width: 96%;
+  max-height: 96%;
+  border-radius: 10px;
+  margin: 2%;
+}
+.gallery__image__title,
+.gallery__image__subtitle {
+  /* border: 1px solid black; */
+  padding: 5px;
+}
