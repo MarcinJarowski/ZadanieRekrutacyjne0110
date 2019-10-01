@@ -8,17 +8,12 @@ const requestData = (url, functionHandler) => {
   fetch(url)
     .then(response => {
       if (response.ok) {
-        console.log(response.status);
         return response.json();
       }
       throw new Error("Response in not OK");
     })
     .then(functionHandler)
     .catch(error => console.log(error.message));
-};
-const preloadImages = url => {
-  let img = new Image();
-  img.src = url;
 };
 const randomDate = () => {
   const getRandomArbitrary = (min, max) => Math.random() * (max - min) + min;
@@ -36,8 +31,6 @@ const appendModal = url => {
   createModalCloseButton();
 };
 const deleteModal = () => {
-  // let closeButton = document.querySelector(".gallery__modal__closeButton");
-  //remove event listener
   gallerySection.removeChild(document.querySelector(".gallery__modal--open"));
 };
 const createModalCloseButton = () => {
@@ -49,7 +42,7 @@ const createModalCloseButton = () => {
 const createList = data => {
   const pictureObjectsArray = data.hits;
 
-  pictureObjectsArray
+  return pictureObjectsArray
     .map(element => {
       const galleryListItem = document.createElement("li");
       const galleryImage = document.createElement("img");
@@ -58,7 +51,7 @@ const createList = data => {
 
       galleryImage.setAttribute("src", element.largeImageURL);
       galleryImage.setAttribute("class", "gallery__image");
-      galleryImage.addEventListener("load", e => {
+      galleryImage.addEventListener("load", () => {
         galleryListItem.appendChild(galleryImage);
         galleryListItem.appendChild(galleryImageTitle);
         galleryListItem.appendChild(galleryImageSubtitle);
