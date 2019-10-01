@@ -1,0 +1,22 @@
+@import "variables.scss";
+@import "mixins.scss";
+
+body {
+  background-color: $deepGrey;
+}
+#gallery {
+  margin: 1vw;
+  @include mediaQueries(320px) {
+    @include galleryList(1);
+    @include galleryListItem($elementWidthOne);
+  }
+  @include mediaQueries(520px) {
+    @include galleryList(2);
+    @include galleryListItem($elementWidthTwo);
+  }
+  @include mediaQueries(1200px) {
+    @include galleryList(3);
+    @include galleryListItem($elementWidthThree);
+  }
+  @include galleryModal;
+}
